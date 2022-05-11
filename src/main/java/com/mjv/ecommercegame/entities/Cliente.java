@@ -1,13 +1,17 @@
 package com.mjv.ecommercegame.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mjv.ecommercegame.model.Endereco;
 
 @Entity
@@ -24,7 +28,12 @@ public class Cliente implements Serializable{
 	private String email;
 	private String senha;
 	private String endereco;
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
+
+
 	public Cliente() {
 		
 	}
@@ -89,13 +98,9 @@ public class Cliente implements Serializable{
 		this.senha = senha;
 	}
 
-//	public Endereco getEndereco() {
-//		return endereco;
-//	}
-//
-//	public void setEndereco(Endereco endereco) {
-//		this.endereco = endereco;
-//	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
 
 	@Override
 	public int hashCode() {
