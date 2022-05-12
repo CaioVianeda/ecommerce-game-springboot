@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.mjv.ecommercegame.entities.enums.StatusPedido;
 
 @Entity
 public class Pedido implements Serializable{
@@ -23,6 +24,8 @@ public class Pedido implements Serializable{
 	private Long id;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant data;
+	
+	private Integer statusPedido;
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
@@ -31,10 +34,11 @@ public class Pedido implements Serializable{
 		
 	}
 
-	public Pedido(Long id, Instant data, Cliente cliente) {
+	public Pedido(Long id, Instant data, StatusPedido statusPedido, Cliente cliente) {
 		super();
 		this.id = id;
 		this.data = data;
+		setStatusPedido(statusPedido);
 		this.cliente = cliente;
 	}
 
@@ -52,6 +56,15 @@ public class Pedido implements Serializable{
 
 	public void setData(Instant data) {
 		this.data = data;
+	}
+
+	public StatusPedido getStatusPedido() {
+		return StatusPedido.valueOf(statusPedido);
+	}
+
+	public void setStatusPedido(StatusPedido statusPedido) {
+		if(statusPedido != null)
+		this.statusPedido = statusPedido.getCodigo();
 	}
 
 	public Cliente getCliente() {
