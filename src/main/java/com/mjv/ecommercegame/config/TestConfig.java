@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.mjv.ecommercegame.entities.Cliente;
 import com.mjv.ecommercegame.entities.Endereco;
+import com.mjv.ecommercegame.entities.ItemPedido;
 import com.mjv.ecommercegame.entities.Pedido;
 import com.mjv.ecommercegame.entities.Produto;
 import com.mjv.ecommercegame.entities.enums.StatusPedido;
 import com.mjv.ecommercegame.repositories.ClienteRepository;
+import com.mjv.ecommercegame.repositories.ItemPedidoRepository;
 import com.mjv.ecommercegame.repositories.PedidoRepository;
 import com.mjv.ecommercegame.repositories.ProdutoRepository;
 
@@ -32,6 +34,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -53,6 +58,10 @@ public class TestConfig implements CommandLineRunner{
 		Pedido p2 = new Pedido(null, Instant.parse("2022-08-20T21:35:07Z"), StatusPedido.AGUARDANDO_PAGAMENTO,c2);
 		Pedido p3 = new Pedido(null, Instant.parse("2022-07-20T21:28:07Z"), StatusPedido.AGUARDANDO_PAGAMENTO,c1);
 		pedidoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		
+		ItemPedido ip1 = new ItemPedido(p1, pr3, 2, pr3.getValor());
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1));
 		
 	}
 	
