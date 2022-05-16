@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mjv.ecommercegame.model.Endereco;
 
 @Entity
 public class Cliente implements Serializable{
@@ -27,7 +28,8 @@ public class Cliente implements Serializable{
 	private String telefone; 
 	private String email;
 	private String senha;
-	private String endereco;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Endereco endereco;
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
@@ -46,7 +48,7 @@ public class Cliente implements Serializable{
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
-		this.endereco = endereco.toString();
+		this.endereco = endereco;
 	}
 
 	

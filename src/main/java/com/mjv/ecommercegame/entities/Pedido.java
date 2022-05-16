@@ -35,11 +35,11 @@ public class Pedido implements Serializable{
 	}
 
 	public Pedido(Long id, Instant data, StatusPedido statusPedido, Cliente cliente) {
-		super();
 		this.id = id;
 		this.data = data;
-		setStatusPedido(statusPedido);
 		this.cliente = cliente;
+		setStatusPedido(statusPedido);
+		
 	}
 
 	public Long getId() {
