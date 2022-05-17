@@ -1,7 +1,9 @@
 package com.mjv.ecommercegame.config;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,6 +17,7 @@ import com.mjv.ecommercegame.entities.Pedido;
 import com.mjv.ecommercegame.entities.Produto;
 import com.mjv.ecommercegame.entities.enums.StatusPedido;
 import com.mjv.ecommercegame.repositories.ClienteRepository;
+import com.mjv.ecommercegame.repositories.EnderecoRepository;
 import com.mjv.ecommercegame.repositories.ItemPedidoRepository;
 import com.mjv.ecommercegame.repositories.PedidoRepository;
 import com.mjv.ecommercegame.repositories.ProdutoRepository;
@@ -48,10 +51,16 @@ public class TestConfig implements CommandLineRunner{
 		
 		Endereco endereco = new Endereco(null,"Rua Badi do Carmo Mesquita", "6", "Praia de Leste", "83255-000");
 		Endereco endereco2 = new Endereco(null,"Alameda Jorge Lacerda", "454", "Canoas", "83255-000");
+		List<Endereco> enderecos1 = new ArrayList<>();
+		List<Endereco> enderecos2 = new ArrayList<>();
+		enderecos1.add(endereco);
+		enderecos2.add(endereco2);
 		
 		
 		Cliente c1 = new Cliente(null, "Caio", "122.875.409-87", "(41)98420-6429", "caio.vianwda@gmail.com","gghh125690", endereco);
 		Cliente c2 = new Cliente(null, "Monalisa", "122.721.875-00", "(41)98420-6429", "monalisa@gmail.com","gghh125690", endereco2);
+		
+		
 		clienteRepository.saveAll(Arrays.asList(c1,c2));
 		
 		Pedido p1 = new Pedido(null, Instant.parse("2022-06-20T21:53:07Z"), StatusPedido.AGUARDANDO_PAGAMENTO,c1);

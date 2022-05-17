@@ -1,12 +1,17 @@
 package com.mjv.ecommercegame.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto implements Serializable{
@@ -18,6 +23,8 @@ public class Produto implements Serializable{
 	private Long id;
 	private Double valor;
 	private String descricao;
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> items = new HashSet<>();
 	
 	public Produto() {
 		
@@ -54,11 +61,22 @@ public class Produto implements Serializable{
 		this.descricao = descricao;
 	}
 
+	@JsonIgnore
+	public Set<Pedido> getPedidos(){
+		Set<Pedido> set = new HashSet<>();
+		
+		for(ItemPedido x : items) {
+			set.add(x.getPedido());
+		}
+		
+		return set;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
