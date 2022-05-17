@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Profile;
 import com.mjv.ecommercegame.entities.Cliente;
 import com.mjv.ecommercegame.entities.Endereco;
 import com.mjv.ecommercegame.entities.ItemPedido;
+import com.mjv.ecommercegame.entities.Pagamento;
 import com.mjv.ecommercegame.entities.Pedido;
 import com.mjv.ecommercegame.entities.Produto;
 import com.mjv.ecommercegame.entities.enums.StatusPedido;
@@ -63,7 +64,7 @@ public class TestConfig implements CommandLineRunner{
 		
 		clienteRepository.saveAll(Arrays.asList(c1,c2));
 		
-		Pedido p1 = new Pedido(null, Instant.parse("2022-06-20T21:53:07Z"), StatusPedido.AGUARDANDO_PAGAMENTO,c1);
+		Pedido p1 = new Pedido(null, Instant.parse("2022-06-20T21:53:07Z"), StatusPedido.PAGO,c1);
 		Pedido p2 = new Pedido(null, Instant.parse("2022-08-20T21:35:07Z"), StatusPedido.AGUARDANDO_PAGAMENTO,c2);
 		Pedido p3 = new Pedido(null, Instant.parse("2022-07-20T21:28:07Z"), StatusPedido.AGUARDANDO_PAGAMENTO,c1);
 		pedidoRepository.saveAll(Arrays.asList(p1, p2, p3));
@@ -72,6 +73,9 @@ public class TestConfig implements CommandLineRunner{
 		
 		itemPedidoRepository.saveAll(Arrays.asList(ip1));
 		
+		Pagamento pagamento = new Pagamento(null,  Instant.parse("2022-06-21T21:53:07Z"), p1);
+		p1.setPagamento(pagamento);
+		pedidoRepository.save(p1);
 	}
 	
 }
