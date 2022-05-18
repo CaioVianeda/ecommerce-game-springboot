@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mjv.ecommercegame.entities.Cliente;
 import com.mjv.ecommercegame.repositories.ClienteRepository;
+import com.mjv.ecommercegame.services.excecoes.ResourceNotFoundException;
 
 
 @Service
@@ -22,7 +23,7 @@ public class ClienteService {
 	
 	public Cliente findById(Long id) {
 		Optional<Cliente> obj =  repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Cliente insert(Cliente obj) {
