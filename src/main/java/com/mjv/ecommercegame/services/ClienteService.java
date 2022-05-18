@@ -28,4 +28,21 @@ public class ClienteService {
 	public Cliente insert(Cliente obj) {
 		return repository.save(obj);
 	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+	
+	public Cliente update(Long id, Cliente obj) {
+		Cliente entity = repository.getById(id);
+		updateData(entity, obj);
+		return repository.save(entity);
+	}
+
+	private void updateData(Cliente entity, Cliente obj) {
+		entity.setName(obj.getName());
+		entity.setCpf(obj.getCpf());
+		entity.setEmail(obj.getEmail());
+		entity.setTelefone(obj.getTelefone());
+	}
 }
