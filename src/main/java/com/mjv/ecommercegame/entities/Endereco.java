@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Endereco implements Serializable{
@@ -21,22 +23,23 @@ public class Endereco implements Serializable{
 	private String numero;
 	private String bairro;
 	private String cep;
-//	@ManyToOne
-//	@JoinColumn(name = "cliente_id")
-//	private Cliente cliente;
+	@JsonIgnore
+	@OneToOne
+	@MapsId
+	private Cliente cliente;
 	
 	public Endereco() {
 		
 	}
 	
-	public Endereco(Long id ,String logradouro, String numero, String bairro, String cep) {
+	public Endereco(Long id ,String logradouro, String numero, String bairro, String cep, Cliente cliente) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.bairro = bairro;
 		this.cep = cep;
-		
+		this.cliente = cliente;
 	}
 
 	public String getLogradouro() {
@@ -70,8 +73,14 @@ public class Endereco implements Serializable{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
-	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	@Override
 	public int hashCode() {
@@ -94,7 +103,7 @@ public class Endereco implements Serializable{
 	@Override
 	public String toString() {
 		return "Endereco [id=" + id + ", logradouro=" + logradouro + ", numero=" + numero + ", bairro=" + bairro
-				+ ", cep=" + cep + ", cliente=" + "]";
+				+ ", cep=" + cep + ", cliente=" + cliente + "]";
 	}
 
 

@@ -28,7 +28,7 @@ public class Cliente implements Serializable{
 	private String telefone; 
 	private String email;
 	private String senha;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Endereco endereco;
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
@@ -40,7 +40,7 @@ public class Cliente implements Serializable{
 		
 	}
 
-	public Cliente(Long id, String name, String cpf, String telefone, String email, String senha, Endereco endereco) {
+	public Cliente(Long id, String name, String cpf, String telefone, String email, String senha) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -48,7 +48,6 @@ public class Cliente implements Serializable{
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
-		this.endereco = endereco;
 	}
 
 	
@@ -102,6 +101,16 @@ public class Cliente implements Serializable{
 
 	public List<Pedido> getPedidos() {
 		return pedidos;
+	}
+	
+	
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	@Override
