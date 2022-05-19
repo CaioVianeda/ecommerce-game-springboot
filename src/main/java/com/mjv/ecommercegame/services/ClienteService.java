@@ -3,6 +3,8 @@ package com.mjv.ecommercegame.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +37,14 @@ public class ClienteService {
 	}
 	
 	public Cliente update(Long id, Cliente obj) {
+		
+		try {
 		Cliente entity = repository.getById(id);
 		updateData(entity, obj);
 		return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(Cliente entity, Cliente obj) {
