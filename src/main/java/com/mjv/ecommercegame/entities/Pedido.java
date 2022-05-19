@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mjv.ecommercegame.entities.enums.StatusPedido;
+import com.mjv.ecommercegame.services.PagamentoService;
 
 @Entity
 public class Pedido implements Serializable{
@@ -125,6 +126,4 @@ public class Pedido implements Serializable{
 		return Objects.equals(cliente, other.cliente) && Objects.equals(data, other.data)
 				&& Objects.equals(id, other.id);
 	}
-	
-	
 }

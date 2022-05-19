@@ -27,13 +27,13 @@ public class Pagamento implements Serializable {
 	private Pedido pedido;
 	
 	public Pagamento() {
-		
+		this.data = Instant.now();
 	}
 	
-	public Pagamento(Long id, Instant data, Pedido pedido) {
+	public Pagamento(Long id, Pedido pedido) {
 		super();
 		this.id = id;
-		this.data = data;
+		this.data = Instant.now();
 		this.pedido = pedido;
 	}
 
