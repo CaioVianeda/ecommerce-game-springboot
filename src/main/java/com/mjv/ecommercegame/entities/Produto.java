@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mjv.ecommercegame.entities.enums.Plataforma;
 
 @Entity
 public class Produto implements Serializable{
@@ -23,6 +24,7 @@ public class Produto implements Serializable{
 	private Long id;
 	private Double valor;
 	private String descricao;
+	private Integer plataforma;
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> items = new HashSet<>();
 	
@@ -30,11 +32,12 @@ public class Produto implements Serializable{
 		
 	}
 
-	public Produto(Long id, Double valor, String descricao) {
+	public Produto(Long id, Double valor, String descricao, Plataforma plataforma) {
 		super();
 		this.id = id;
 		this.valor = valor;
 		this.descricao = descricao;
+		setPlataforma(plataforma);
 	}
 
 	public Long getId() {
@@ -59,6 +62,17 @@ public class Produto implements Serializable{
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	
+
+	public Plataforma getPlataforma() {
+		return Plataforma.valueOf(plataforma);
+	}
+
+	public void setPlataforma(Plataforma plataforma) {
+		if(plataforma != null)
+		this.plataforma = plataforma.getCodigo();
 	}
 
 	@JsonIgnore

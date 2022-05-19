@@ -1,16 +1,16 @@
 package com.mjv.ecommercegame.entities.enums;
 
-public enum StatusPedido {
+public enum Plataforma {
 	
-	AGUARDANDO_PAGAMENTO(1),
-	PAGO(2),
-	ENVIADO(3),
-	ENTREGUE(4),
-	CANCELADO(5);
+	PLAYSTATION(1),
+	XBOX360(2),
+	XBOXONE(3),
+	NINTENDO(4),
+	PC(5);
 	
 	private int codigo;
 	
-	private StatusPedido(int codigo) {
+	private Plataforma(int codigo) {
 		this.codigo = codigo;
 	}
 
@@ -18,9 +18,9 @@ public enum StatusPedido {
 		return codigo;
 	}
 	
-	public static StatusPedido valueOf(int codigo) {
+	public static Plataforma valueOf(int codigo) {
 		
-		for( StatusPedido x : StatusPedido.values()) {
+		for( Plataforma x : Plataforma.values()) {
 			if( x.getCodigo() == codigo) {
 				return x;
 			}

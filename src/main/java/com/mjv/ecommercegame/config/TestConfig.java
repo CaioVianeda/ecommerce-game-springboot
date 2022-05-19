@@ -16,9 +16,9 @@ import com.mjv.ecommercegame.entities.ItemPedido;
 import com.mjv.ecommercegame.entities.Pagamento;
 import com.mjv.ecommercegame.entities.Pedido;
 import com.mjv.ecommercegame.entities.Produto;
+import com.mjv.ecommercegame.entities.enums.Plataforma;
 import com.mjv.ecommercegame.entities.enums.StatusPedido;
 import com.mjv.ecommercegame.repositories.ClienteRepository;
-import com.mjv.ecommercegame.repositories.EnderecoRepository;
 import com.mjv.ecommercegame.repositories.ItemPedidoRepository;
 import com.mjv.ecommercegame.repositories.PedidoRepository;
 import com.mjv.ecommercegame.repositories.ProdutoRepository;
@@ -45,9 +45,9 @@ public class TestConfig implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Produto pr1 = new Produto(null,200.00,"Alexa1");
-		Produto pr2 = new Produto(null,300.00,"Alexa2");
-		Produto pr3 = new Produto(null,400.00,"Alexa3");
+		Produto pr1 = new Produto(null,150.00,"God of War",Plataforma.PLAYSTATION);
+		Produto pr2 = new Produto(null,300.00,"The Last of Us",Plataforma.PLAYSTATION);
+		Produto pr3 = new Produto(null,80.00,"Horizon Zero Dawn",Plataforma.PC);
 		produtoRepository.saveAll(Arrays.asList(pr1,pr2,pr3));
 		
 		Endereco endereco = new Endereco(null,"Rua Badi do Carmo Mesquita", "6", "Praia de Leste", "83255-000");
